@@ -230,7 +230,7 @@ public class HtmlPublisher extends Recorder {
                     listener.error("Specified HTML directory '" + archiveDir + "' does not exist.");
                     if (!allowMissing) {
                         build.setResult(Result.FAILURE);
-                        return true;
+                        return false;
                     }
                 }
 
@@ -247,7 +247,7 @@ public class HtmlPublisher extends Recorder {
                             listener.error("This is especially strange since your build otherwise succeeded.");
                         }
                         build.setResult(Result.FAILURE);
-                        return true;
+                        return false;
                     } else {
                         continue;
                     }
@@ -256,7 +256,7 @@ public class HtmlPublisher extends Recorder {
                 Util.displayIOException(e, listener);
                 e.printStackTrace(listener.fatalError("HTML Publisher failure"));
                 build.setResult(Result.FAILURE);
-                return true;
+                return false;
             }
 
             // Index files might be a list of ant patterns, e.g. "**/*index.html,**/*otherFile.html"
